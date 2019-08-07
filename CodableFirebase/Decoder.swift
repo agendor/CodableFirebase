@@ -1249,6 +1249,7 @@ extension _FirebaseDecoder {
         } else if T.self == IndexSet.self || T.self == NSIndexSet.self {
             decoded = value as! T
         } else if options.skipFirestoreTypes && (T.self is FirestoreDecodable.Type) {
+            guard !(value is NSNull) else { return nil }
             decoded = value as! T
         } else {
             self.storage.push(container: value)
